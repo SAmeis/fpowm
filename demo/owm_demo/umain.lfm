@@ -1,0 +1,115 @@
+object frmMain: TfrmMain
+  Left = 423
+  Height = 427
+  Top = 167
+  Width = 912
+  Caption = 'OpenWeatherMap - Demo application'
+  ClientHeight = 427
+  ClientWidth = 912
+  Position = poDefault
+  LCLVersion = '1.3'
+  object pgOutput: TPageControl
+    AnchorSideLeft.Control = PropGridOptions
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 272
+    Height = 427
+    Top = 0
+    Width = 640
+    ActivePage = tsForecast3h
+    Align = alCustom
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    TabIndex = 0
+    TabOrder = 0
+    OnChange = pgOutputChange
+    object tsForecast3h: TTabSheet
+      Caption = '3h Forecast'
+    end
+    object tsForecastDaily: TTabSheet
+      Caption = 'Daily Forecast'
+    end
+    object tsWeather: TTabSheet
+      Caption = 'Current Weather'
+    end
+    object tsFind: TTabSheet
+      Caption = 'Find'
+    end
+    object tsGroup: TTabSheet
+      Caption = 'Group'
+    end
+    object tsHistoryStation: TTabSheet
+      Caption = 'Station History'
+    end
+    object tsHistoryCity: TTabSheet
+      Caption = 'City History'
+    end
+  end
+  object PropGridOptions: TTIPropertyGrid
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideBottom.Control = btnQuery
+    Left = 0
+    Height = 325
+    Top = 0
+    Width = 272
+    Align = alCustom
+    Anchors = [akTop, akLeft, akBottom]
+    DefaultValueFont.Color = clWindowText
+    Filter = [tkInteger, tkChar, tkEnumeration, tkFloat, tkSet, tkMethod, tkSString, tkLString, tkAString, tkWString, tkVariant, tkArray, tkRecord, tkInterface, tkClass, tkObject, tkWChar, tkBool, tkInt64, tkQWord, tkDynArray, tkInterfaceRaw, tkProcVar, tkUString, tkUChar, tkHelper, tkFile, tkClassRef, tkPointer]
+    Indent = 16
+    NameFont.Color = clWindowText
+    TIObject = OptWeather
+    ValueFont.Color = clMaroon
+  end
+  object btnQuery: TButton
+    AnchorSideLeft.Control = PropGridOptions
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 86
+    Height = 30
+    Top = 361
+    Width = 100
+    Align = alCustom
+    Anchors = [akLeft, akBottom]
+    AutoSize = True
+    BorderSpacing.Top = 36
+    BorderSpacing.Bottom = 36
+    Caption = 'Query'
+    Constraints.MinHeight = 30
+    Constraints.MinWidth = 100
+    TabOrder = 2
+  end
+  object OptFC3h: TOWMForecastOptions
+    left = 8
+    top = 328
+  end
+  object OptWeather: TOWMWeatherOptions
+    left = 56
+    top = 328
+  end
+  object OptFind: TOWMFindOptions
+    left = 56
+    top = 384
+  end
+  object OptGroup: TOWMGroupOptions
+    left = 104
+    top = 328
+  end
+  object OptHistoryCity: TOWMHistoryOptions
+    left = 104
+    top = 384
+  end
+  object OptFCDaily: TOWMForecastOptions
+    left = 8
+    top = 384
+  end
+  object OptHistoryStation: TOWMHistoryOptions
+    left = 152
+    top = 328
+  end
+end

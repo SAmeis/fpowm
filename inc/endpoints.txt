@@ -1,0 +1,60 @@
+http://api.openweathermap.org/data/2.5/
+	weather (data classes defined, not tested)
+		# Name (priority: 1)
+		q=London
+		q=London,ca
+		# ID (priority: 2)
+		id=2172797
+		# coordinates (priority: 3)
+		lat=35&lon=139
+
+		# other parameters
+			mode=xml
+			mode=html
+			mode=json
+
+			units=imperial
+			units=metric
+
+			lang=zh_cn
+      # supported: English - en, Russian - ru, Italian - it, Spanish - sp, Ukrainian - ua, German - de, Portuguese - pt, Romanian - ro, Polish - pl, Finnish - fi, Dutch - nl, French - fr, Bulgarian - bg, Swedish - se, Chinese Traditional - zh_tw, Chinese Simplified - zh_cn, Turkish - tr , Czech - cz, Galician - gl, Vietnamese - vi, Arabic - ar, Macedonian - mk, Slovak - sk
+
+			# Callback (passes json data to a JavaScript function)
+			callback=test
+	group (data classes defined, not tested)
+		id=524901,703448,2643743,1
+		# mode has to be json (or not specified)
+		mode=json
+	forecast (data classes defined, tested)
+	forecast/daily (data classes defined, not tested)
+		# count of days
+		cnt=7
+	find (data classes defined, not tested)
+		q=London,uk
+		lat=35&lon=139
+		cnt=3
+		type=accurate
+		type=like
+  history/station (data classes defined, not tested)
+    id=<station_id>
+    type=tick
+    type=hour
+    type=day
+  history/city (data classes defined, not tested)
+    id=524901
+    start=<unix time utc time zone>
+    end=<unix time>
+
+    # count
+    cnt=
+
+    type=hour
+    type=tick
+    type=day
+
+# how locations may be specified
+weather		q, id, lat/lon
+forecast	q, id, lat/lon
+find		q, lat/lon
+history		id
+group		[id]

@@ -1,0 +1,104 @@
+object Form1: TForm1
+  Left = 332
+  Height = 563
+  Top = 159
+  Width = 729
+  Caption = 'Form1'
+  ClientHeight = 563
+  ClientWidth = 729
+  OnDestroy = FormDestroy
+  LCLVersion = '1.3'
+  object MeJSON: TMemo
+    Left = 0
+    Height = 563
+    Top = 0
+    Width = 312
+    Align = alLeft
+    Lines.Strings = (
+      '{'
+      '  "cod": "200",'
+      '  "message": 0.0531,'
+      '  "city": {'
+      '    "id": "2858103",'
+      '    "name": "Odenthal",'
+      '    "coord": {'
+      '      "lon": 7.11691,'
+      '      "lat": 51.0326'
+      '    },'
+      '    "country": "Germany",'
+      '    "population": 0'
+      '  },'
+      '  "cnt": 35,'
+      '  "list": ['
+      '    {'
+      '      "dt": 1398708000,'
+      '      "main": {'
+      '        "temp": 14.11,'
+      '        "temp_min": 13.88,'
+      '        "temp_max": 14.11,'
+      '        "pressure": 1001.13,'
+      '        "sea_level": 1022.75,'
+      '        "grnd_level": 1001.13,'
+      '        "humidity": 74,'
+      '        "temp_kf": 0.23'
+      '      },'
+      '      "weather": [{'
+      '          "id": 802,'
+      '          "main": "Clouds",'
+      '          "description": "scattered clouds",'
+      '          "icon": "03d"'
+      '        }],'
+      '      "clouds": {"all": 32},'
+      '      "wind": {'
+      '        "speed": 2.62,'
+      '        "deg": 20.5078'
+      '      },'
+      '      "rain": {"3h": 23},'
+      '      "sys": {"pod": "d"},'
+      '      "dt_txt": "2014-04-28 18:00:00"'
+      '    }'
+      '  ]'
+      '}'
+    )
+    ScrollBars = ssAutoBoth
+    TabOrder = 0
+  end
+  object BtnLoadjson: TButton
+    Left = 336
+    Height = 25
+    Top = 24
+    Width = 75
+    Caption = 'Load'
+    OnClick = BtnLoadjsonClick
+    TabOrder = 1
+  end
+  object BtnSavejson: TButton
+    Left = 336
+    Height = 25
+    Top = 64
+    Width = 75
+    Caption = 'Save'
+    OnClick = BtnSavejsonClick
+    TabOrder = 2
+  end
+  object Memo1: TMemo
+    Left = 440
+    Height = 563
+    Top = 0
+    Width = 289
+    Align = alRight
+    Lines.Strings = (
+      'Memo1'
+    )
+    TabOrder = 3
+  end
+  object Button1: TButton
+    Left = 336
+    Height = 25
+    Top = 136
+    Width = 75
+    Caption = 'Button1'
+    OnClick = Button1Click
+    TabOrder = 4
+  end
+end

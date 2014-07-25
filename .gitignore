@@ -1,0 +1,9 @@
+backup
+*.res
+*.lps
+*.exe
+*.o
+*.ppu
+*.compiled
+*.or
+lib
