@@ -87,7 +87,10 @@ implementation
 procedure Register;
 begin
   RegisterComponents('OpenWeatherMap', [TOWMDataComponent]);
+end;
 
+procedure RegisterPropEdits;
+begin
   // Register Property Editors
   RegisterPropertyEditor(TypeInfo(TComponentName)      , TURLParamBase      , 'Name'       , THiddenPropertyEditor);
   RegisterPropertyEditor(TypeInfo(Integer)             , TURLParamBase      , 'Tag'        , THiddenPropertyEditor);
@@ -222,5 +225,8 @@ begin
   end;
 end;
 
+
+initialization
+  RegisterPropEdits;
 end.
 
