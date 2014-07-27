@@ -234,7 +234,7 @@ begin
   LFCD_morn.Caption := FloatToStr(fcdi.temp.morn);
   LFCD_night.Caption := FloatToStr(fcdi.temp.night);
   LFCD_pressure.Caption := FloatToStr(fcdi.pressure);
-  LFCD_speed.Caption := FloatToStr(fcdi.pressure);
+  LFCD_speed.Caption := FloatToStr(fcdi.speed);
   LFCD_wdescr.Caption := TWeather(fcdi.weather.Items[0]).description;
   LFCD_wmain.Caption := TWeather(fcdi.weather.Items[0]).main;
 
