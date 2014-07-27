@@ -15,6 +15,7 @@ type
   TForm1 = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
     EQuery: TEdit;
     Label1: TLabel;
     Label10: TLabel;
@@ -100,6 +101,7 @@ type
     TsForecast3h: TTabSheet;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure SeFC3HChange(Sender: TObject);
     procedure SeFCDChange(Sender: TObject);
@@ -183,6 +185,11 @@ begin
   else
     exit;
   end;
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  MeInput.Text := MeResult.Text;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
