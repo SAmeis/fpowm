@@ -595,7 +595,7 @@ type
 
 implementation
 
-uses dateutils, fpjsonrtti, jsonparser;
+uses dateutils, fpjsonrtti, jsonparser, jsonscanner;
 
 type
   TJSONStreamModify = procedure(aJSON: TJSONObject);
@@ -880,7 +880,7 @@ function StrToJSON(const aStr: String): TJSONObject;
 var
   p: TJSONParser;
 begin
-  p := TJSONParser.Create(aStr);
+  p := TJSONParser.Create(aStr, DefaultOptions);
   try
     Result := TJSONObject(p.Parse);
   finally

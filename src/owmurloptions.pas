@@ -173,7 +173,7 @@ type
   TURLParamInt = class(TURLParamIntAbstract)
   protected
     function GetValueAsString: UTF8String; override;
-    procedure SetValue(aValue: _URLType); override;
+    procedure SetValue(aValue: Int64); override;
     function GetMinValue: Int64; virtual;
     function GetMaxValue: Int64; virtual;
   published
@@ -252,7 +252,7 @@ type
   protected
     class function GetParamName: UTF8String; override;
     function GetValueAsString: UTF8String; override;
-    procedure SetValue(aValue: _URLType); override;
+    procedure SetValue(aValue: TMultipleIDS); override;
     procedure ReadIDs(Reader: TReader);
     procedure WriteIDs(Writer: TWriter);
   public
@@ -290,6 +290,7 @@ type
     class function GetFirstSetParam(const a: array of TURLParamBase): TURLParamBase;
     class procedure UnsetParams(const a: array of TURLParamBase);
     class function ParamsToString(const a: array of TURLParamBase): UTF8String;
+    class function GetEndpoint: String; virtual; abstract; static;
   protected
     property Mode       : TURLParamMode        read fMode;
     property Units      : TURLParamUnits       read fUnits;
@@ -311,13 +312,19 @@ type
     function GetAsText: UTF8String;
     function ToString: String; override;
     procedure DefineProperties(Filer: TFiler); override;
+    function GetURL: String;
+    class property Endpoint: String read GetEndpoint;
   published
     property APIKey     : TURLParamAPIKey      read fAPIKey;
     property Callback   : TURLParamCallback    read fCallback;
     property AsText     : UTF8String           read GetAsText;
   end;
 
+  { TOWMWeatherOptions }
+
   TOWMWeatherOptions = class(TOWMCustomOptions)
+  protected
+    class function GetEndpoint: String; override; static;
   published
     property Mode       ;
     property Units      ;
@@ -327,7 +334,11 @@ type
     property Coordinates;
   end;
 
+  { TOWMGroupOptions }
+
   TOWMGroupOptions = class(TOWMCustomOptions)
+  protected
+    class function GetEndpoint: String; override; static;
   published
     property Mode       ;
     property Units      ;
@@ -340,7 +351,21 @@ type
     property Count;
   end;
 
+  TOWMForecast3hOptions = class(TOWMWeatherOptions)
+  protected
+    class function GetEndpoint: String; override; static;
+  end;
+
+  TOWMForecastDailyOptions = class(TOWMForecastOptions)
+  protected
+    class function GetEndpoint: String; override; static;
+  end;
+
+  { TOWMFindOptions }
+
   TOWMFindOptions = class(TOWMCustomOptions)
+  protected
+    class function GetEndpoint: String; override; static;
   published
     property Query      ;
     property Coordinates;
@@ -358,6 +383,16 @@ type
     property Units      ;
   end;
 
+  TOWMHistoryStationOptions = class(TOWMHistoryOptions)
+  protected
+    class function GetEndpoint: String; override; static;
+  end;
+
+  TOWMHistoryCityOptions = class(TOWMHistoryOptions)
+  protected
+    class function GetEndpoint: String; override; static;
+  end;
+
   procedure Register;
 
 implementation
@@ -366,7 +401,56 @@ uses fphttpclient, math, dateutils, sysutils, LResources;
 
 procedure Register;
 begin
-  RegisterComponents('OpenWeatherMap', [TOWMForecastOptions, TOWMWeatherOptions, TOWMFindOptions, TOWMGroupOptions, TOWMHistoryOptions]);
+  RegisterComponents('OpenWeatherMap', [TOWMForecast3hOptions, TOWMForecastDailyOptions, TOWMWeatherOptions, TOWMFindOptions, TOWMGroupOptions, TOWMHistoryCityOptions, TOWMHistoryStationOptions]);
+end;
+
+{ TOWMHistoryCityOptions }
+
+class function TOWMHistoryCityOptions.GetEndpoint: String;
+begin
+ Result := OWM_ENDPOINT_HISTORY_CITY;
+end;
+
+{ TOWMHistoryStationOptions }
+
+class function TOWMHistoryStationOptions.GetEndpoint: String;
+begin
+  Result := OWM_ENDPOINT_HISTORY_STATION;
+end;
+
+{ TOWMFindOptions }
+
+class function TOWMFindOptions.GetEndpoint: String;
+begin
+  Result := OWM_ENDPOINT_FIND;
+end;
+
+{ TOWMForecastDailyOptions }
+
+class function TOWMForecastDailyOptions.GetEndpoint: String;
+begin
+  Result := OWM_ENDPOINT_FORECAST_DAILY;
+end;
+
+{ TOWMFForecast3hOptions }
+
+class function TOWMForecast3hOptions.GetEndpoint: String;
+begin
+  Result := OWM_ENDPOINT_FORECAST;
+end;
+
+{ TOWMGroupOptions }
+
+class function TOWMGroupOptions.GetEndpoint: String;
+begin
+ Result := OWM_ENDPOINT_GROUP;
+end;
+
+{ TOWMWeatherOptions }
+
+class function TOWMWeatherOptions.GetEndpoint: String;
+begin
+  Result := OWM_ENDPOINT_WEATHER;
 end;
 
 { TURLParamMultipleID }
@@ -395,7 +479,7 @@ begin
     Result := '';
 end;
 
-procedure TURLParamMultipleID.SetValue(aValue: _URLType);
+procedure TURLParamMultipleID.SetValue(aValue: TMultipleIDS);
 begin
   fValue.Assign(aValue);
   fIsSet := fValue.Count > 0;
@@ -676,6 +760,11 @@ begin
   inherited DefineProperties(Filer);
 end;
 
+function TOWMCustomOptions.GetURL: String;
+begin
+  Result := OWM_BASE_URL+Self.Endpoint+'?'+Self.ToString;
+end;
+
 function TOWMCustomOptions.GetLocation: TURLParamBase;
 begin
   Result := GetFirstSetParam([fQuery, fCoordinates, fID]);
@@ -716,7 +805,7 @@ begin
   Result := IntToStr(fValue);
 end;
 
-procedure TURLParamInt.SetValue(aValue: _URLType);
+procedure TURLParamInt.SetValue(aValue: Int64);
 begin
   inherited SetValue(EnsureRange(aValue, GetMinValue, GetMaxValue));
 end;

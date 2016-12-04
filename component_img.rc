@@ -1,0 +1,5 @@
+TOWMWEATHEROPTIONS  RCDATA "img//towmweatheroptions.png"
+TOWMFINDOPTIONS     RCDATA "img//towmfindoptions.bmp"
+TOWMGROUPOPTIONS    RCDATA "img//towmgroupoptions.bmp"
+TOWMHISTORYOPTIONS  RCDATA "img//towmhistoryoptions.png"
+TOWMFORECASTOPTIONS RCDATA "img//towmforecastoptions.bmp"
